@@ -12,14 +12,14 @@
   </defs>
 
   <!-- Background Switch Image -->
-  <image 
-    href="https://productresources.commscope.com/admin/ImageServer.php?ID=bdd50a2d447eb565e2d8ea13cdad0fa41b5bdadddbcb87bcc735c5ea1f5d1b43:195474@pjk349&class=Mamfile&rand=77dc54938b4af75e9ef0eb40096686f7&omitPreview=true&downloadname=RUCKUS-ICX8100-24-front.png&preset=10"
-    x="0"
-    y="0"
-    width="1200"
-    height="400"
-    preserveAspectRatio="xMidYMid meet"
-  />
+<image 
+  href="https://productresources.commscope.com/admin/ImageServer.php?ID=bdd50a2d447eb565e2d8ea13cdad0fa41b5bdadddbcb87bcc735c5ea1f5d1b43:195474@pjk349&amp;class=Mamfile&amp;rand=77dc54938b4af75e9ef0eb40096686f7&amp;omitPreview=true&amp;downloadname=RUCKUS-ICX8100-24-front.png&amp;preset=10"
+  x="0"
+  y="0"
+  width="1200"
+  height="400"
+  preserveAspectRatio="xMidYMid meet"
+/>
 
   <!-- SETTINGS -->
   <!-- Box Size = 30 -->
