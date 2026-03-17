@@ -1,0 +1,3796 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 0,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 36,
+      "panels": [],
+      "title": "ICX 8200 - Core Swtiches Monitoring",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "limit": 24,
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-core-stack\",\n        instance=\"192.0.100.1\"\n      }[5m]\n    ) == 1\n  )\n  and on (ifIndex, instance)\n  ifName{\n    job=\"ruckus-core-stack\",\n    instance=\"192.0.100.1\",\n    ifName=~\"ethernet 1/1/.*\"\n  }\n)\nor vector(0)",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8100\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 1)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Switch 1 - Active Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-core-stack\", \n        instance=\"192.0.100.1\"\n      }[5m]\n    ) == 0\n  )\n  and on (ifIndex, instance)\n  ifName{\n    job=\"ruckus-core-stack\",\n    instance=\"192.0.100.1\",\n    ifName=~\"ethernet 1/1/.*\"\n  }\n)\nor vector(0)",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8100\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 0)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Swich 1 - Down Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              },
+              {
+                "color": "text",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 8,
+        "y": 1
+      },
+      "id": 23,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-core-stack\",\n        instance=\"192.0.100.1\"\n      }[5m]\n    ) == 2\n  )\n  and on (ifIndex, instance)\n  ifName{\n    job=\"ruckus-core-stack\",\n    instance=\"192.0.100.1\",\n    ifName=~\"ethernet 1/1/.*\"\n  }\n)\nor vector(0)",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8100\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 2)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Switch 1 - Empty Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 12,
+        "y": 1
+      },
+      "id": 42,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "limit": 24,
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-core-stack\",\n        instance=\"192.0.100.1\"\n      }[5m]\n    ) == 1\n  )\n  and on (ifIndex, instance)\n  ifName{\n    job=\"ruckus-core-stack\",\n    instance=\"192.0.100.1\",\n    ifName=~\"ethernet 2/1/.*\"\n  }\n)\nor vector(0)",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8100\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 1)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Switch 2 - Active Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "id": 43,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-core-stack\", \n        instance=\"192.0.100.1\"\n      }[5m]\n    ) == 0\n  )\n  and on (ifIndex, instance)\n  ifName{\n    job=\"ruckus-core-stack\",\n    instance=\"192.0.100.1\",\n    ifName=~\"ethernet 2/1/.*\"\n  }\n)\nor vector(0)",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8100\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 0)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Swich 1 - Down Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              },
+              {
+                "color": "text",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "id": 44,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-core-stack\",\n        instance=\"192.0.100.1\"\n      }[5m]\n    ) == 2\n  )\n  and on (ifIndex, instance)\n  ifName{\n    job=\"ruckus-core-stack\",\n    instance=\"192.0.100.1\",\n    ifName=~\"ethernet 2/1/.*\"\n  }\n)\nor vector(0)",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8100\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 2)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Switch 1 - Empty Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 53,
+      "options": {
+        "animationControlEnabled": false,
+        "animationsEnabled": true,
+        "debuggingCtr": {
+          "colorsCtr": 31,
+          "dataCtr": 0,
+          "displaySvgCtr": 0,
+          "mappingsCtr": 1,
+          "timingsCtr": 0
+        },
+        "highlighterEnabled": true,
+        "highlighterSelection": "",
+        "panZoomEnabled": true,
+        "panelConfig": "---\ncellIdPreamble: \"cell-\"\n\ncells:\n  port1:  { dataRef: port1,  fillColor: { thresholdsRef: operstatus } }\n  port2:  { dataRef: port2,  fillColor: { thresholdsRef: operstatus } }\n  port3:  { dataRef: port3,  fillColor: { thresholdsRef: operstatus } }\n  port4:  { dataRef: port4,  fillColor: { thresholdsRef: operstatus } }\n  port5:  { dataRef: port5,  fillColor: { thresholdsRef: operstatus } }\n  port6:  { dataRef: port6,  fillColor: { thresholdsRef: operstatus } }\n  port7:  { dataRef: port7,  fillColor: { thresholdsRef: operstatus } }\n  port8:  { dataRef: port8,  fillColor: { thresholdsRef: operstatus } }\n  port9:  { dataRef: port9,  fillColor: { thresholdsRef: operstatus } }\n  port10: { dataRef: port10, fillColor: { thresholdsRef: operstatus } }\n  port11: { dataRef: port11, fillColor: { thresholdsRef: operstatus } }\n  port12: { dataRef: port12, fillColor: { thresholdsRef: operstatus } }\n  port13: { dataRef: port13, fillColor: { thresholdsRef: operstatus } }\n  port14: { dataRef: port14, fillColor: { thresholdsRef: operstatus } }\n  port15: { dataRef: port15, fillColor: { thresholdsRef: operstatus } }\n  port16: { dataRef: port16, fillColor: { thresholdsRef: operstatus } }\n  port17: { dataRef: port17, fillColor: { thresholdsRef: operstatus } }\n  port18: { dataRef: port18, fillColor: { thresholdsRef: operstatus } }\n  port19: { dataRef: port19, fillColor: { thresholdsRef: operstatus } }\n  port20: { dataRef: port20, fillColor: { thresholdsRef: operstatus } }\n  port21: { dataRef: port21, fillColor: { thresholdsRef: operstatus } }\n  port22: { dataRef: port22, fillColor: { thresholdsRef: operstatus } }\n  port23: { dataRef: port23, fillColor: { thresholdsRef: operstatus } }\n  port24: { dataRef: port24, fillColor: { thresholdsRef: operstatus } }",
+        "siteConfig": "---\ncolors:\n  up: \"#00c853\"\n  empty: \"#708090\"\n\ncellColorMappings:\n  darkTheme:\n    up: up\n    empty: empty\n\nthresholds:\n  operstatus:\n    - { color: up, level: 1 }   # up\n    - { color: empty, level: 2}   # empty",
+        "svg": "https://raw.githubusercontent.com/ragini-kumain/grafana-network-assets/main/switches/ruckus_icx8200_24.svg",
+        "testDataEnabled": true,
+        "timeSliderEnabled": true,
+        "timeSliderMode": "local"
+      },
+      "pluginVersion": "1.20.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "max_over_time(\n  ifOperStatus{\n    job=\"ruckus-core-stack\",\n    instance=\"192.0.100.1\"\n  }[5m]\n)\n* on (ifIndex, instance) group_left(ifName)\nifName{\n  job=\"ruckus-core-stack\",\n  instance=\"192.0.100.1\",\n  ifName=~\"ethernet 1/1/.*\"\n}",
+          "legendFormat": "{{ifName}}",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> keep(columns: [\"_time\", \"_value\", \"port\"])\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Switch 1 - Ruckus ICX 8200",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "ethernet 1/1/(\\d+)",
+            "renamePattern": "port$1"
+          }
+        }
+      ],
+      "type": "andrewbmchugh-flow-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 52,
+      "options": {
+        "animationControlEnabled": false,
+        "animationsEnabled": true,
+        "debuggingCtr": {
+          "colorsCtr": 31,
+          "dataCtr": 0,
+          "displaySvgCtr": 0,
+          "mappingsCtr": 1,
+          "timingsCtr": 0
+        },
+        "highlighterEnabled": true,
+        "highlighterSelection": "",
+        "panZoomEnabled": true,
+        "panelConfig": "---\ncellIdPreamble: \"cell-\"\n\ncells:\n  port1:  { dataRef: port1,  fillColor: { thresholdsRef: operstatus } }\n  port2:  { dataRef: port2,  fillColor: { thresholdsRef: operstatus } }\n  port3:  { dataRef: port3,  fillColor: { thresholdsRef: operstatus } }\n  port4:  { dataRef: port4,  fillColor: { thresholdsRef: operstatus } }\n  port5:  { dataRef: port5,  fillColor: { thresholdsRef: operstatus } }\n  port6:  { dataRef: port6,  fillColor: { thresholdsRef: operstatus } }\n  port7:  { dataRef: port7,  fillColor: { thresholdsRef: operstatus } }\n  port8:  { dataRef: port8,  fillColor: { thresholdsRef: operstatus } }\n  port9:  { dataRef: port9,  fillColor: { thresholdsRef: operstatus } }\n  port10: { dataRef: port10, fillColor: { thresholdsRef: operstatus } }\n  port11: { dataRef: port11, fillColor: { thresholdsRef: operstatus } }\n  port12: { dataRef: port12, fillColor: { thresholdsRef: operstatus } }\n  port13: { dataRef: port13, fillColor: { thresholdsRef: operstatus } }\n  port14: { dataRef: port14, fillColor: { thresholdsRef: operstatus } }\n  port15: { dataRef: port15, fillColor: { thresholdsRef: operstatus } }\n  port16: { dataRef: port16, fillColor: { thresholdsRef: operstatus } }\n  port17: { dataRef: port17, fillColor: { thresholdsRef: operstatus } }\n  port18: { dataRef: port18, fillColor: { thresholdsRef: operstatus } }\n  port19: { dataRef: port19, fillColor: { thresholdsRef: operstatus } }\n  port20: { dataRef: port20, fillColor: { thresholdsRef: operstatus } }\n  port21: { dataRef: port21, fillColor: { thresholdsRef: operstatus } }\n  port22: { dataRef: port22, fillColor: { thresholdsRef: operstatus } }\n  port23: { dataRef: port23, fillColor: { thresholdsRef: operstatus } }\n  port24: { dataRef: port24, fillColor: { thresholdsRef: operstatus } }",
+        "siteConfig": "---\ncolors:\n  up: \"#00c853\"\n  empty: \"#708090\"\n\ncellColorMappings:\n  darkTheme:\n    up: up\n    empty: empty\n\nthresholds:\n  operstatus:\n    - { color: up, level: 1 }   # up\n    - { color: empty, level: 2}   # empty",
+        "svg": "https://raw.githubusercontent.com/ragini-kumain/grafana-network-assets/main/switches/ruckus_icx8200_24.svg",
+        "testDataEnabled": true,
+        "timeSliderEnabled": true,
+        "timeSliderMode": "local"
+      },
+      "pluginVersion": "1.20.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "max_over_time(\n  ifOperStatus{\n    job=\"ruckus-core-stack\",\n    instance=\"192.0.100.1\"\n  }[5m]\n)\n* on (ifIndex, instance) group_left(ifName)\nifName{\n  job=\"ruckus-core-stack\",\n  instance=\"192.0.100.1\",\n  ifName=~\"ethernet 2/1/.*\"\n}",
+          "legendFormat": "{{ifName}}",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> keep(columns: [\"_time\", \"_value\", \"port\"])\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Switch 1 - Ruckus ICX 8200",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "ethernet 2/1/(\\d+)",
+            "renamePattern": "port$1"
+          }
+        }
+      ],
+      "type": "andrewbmchugh-flow-panel"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 10,
+      "panels": [],
+      "title": "ICX 8100 - Access Switches Monitoring",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 0,
+        "y": 17
+      },
+      "id": 20,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "limit": 24,
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-access-switches\",\n        instance=\"192.0.100.3\"\n      }[5m]\n    )\n    * on (ifIndex, instance) group_left(ifName)\n    ifName{\n      job=\"ruckus-access-switches\",\n      instance=\"192.0.100.3\",\n      ifName=~\"ethernet 1/1/.*\"\n    }\n  ) == 1\n)\nor vector(0)\n",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 1)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Access Switch 1 – Active Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 4,
+        "y": 17
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-access-switches\",\n        instance=\"192.0.100.3\"\n      }[5m]\n    )\n    * on (ifIndex, instance) group_left(ifName)\n    ifName{\n      job=\"ruckus-access-switches\",\n      instance=\"192.0.100.3\",\n      ifName=~\"ethernet 1/1/.*\"\n    }\n  ) == 0\n)\nor vector(0)\n",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 0)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Access Switch 1 – Down Ports",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": []
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              },
+              {
+                "color": "text",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 8,
+        "y": 17
+      },
+      "id": 21,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-access-switches\",\n        instance=\"192.0.100.3\"\n      }[5m]\n    )\n    * on (ifIndex, instance) group_left(ifName)\n    ifName{\n      job=\"ruckus-access-switches\",\n      instance=\"192.0.100.3\",\n      ifName=~\"ethernet 1/1/.*\"\n    }\n  ) == 2\n)\nor vector(0)\n",
+          "legendFormat": "{{ifName}}",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 2)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Access Switch 1 - Empty Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 12,
+        "y": 17
+      },
+      "id": 37,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "limit": 24,
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-access-switches\",\n        instance=\"192.0.100.4\"\n      }[5m]\n    )\n    * on (ifIndex, instance) group_left(ifName)\n    ifName{\n      job=\"ruckus-access-switches\",\n      instance=\"192.0.100.4\",\n      ifName=~\"ethernet 1/1/.*\"\n    }\n  ) == 1\n)\nor vector(0)\n",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 1)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Server Switch – Active Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "description": "Server access switch ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 16,
+        "y": 17
+      },
+      "id": 38,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-access-switches\",\n        instance=\"192.0.100.4\"\n      }[5m]\n    )\n    * on (ifIndex, instance) group_left(ifName)\n    ifName{\n      job=\"ruckus-access-switches\",\n      instance=\"192.0.100.4\",\n      ifName=~\"ethernet 1/1/.*\"\n    }\n  ) == 0\n)\nor vector(0)\n",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 0)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Server Switch – Down Ports",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": []
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": 0
+              },
+              {
+                "color": "text",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "/ 24"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 20,
+        "y": 17
+      },
+      "id": 39,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "count(\n  (\n    max_over_time(\n      ifOperStatus{\n        job=\"ruckus-access-switches\",\n        instance=\"192.0.100.4\"\n      }[5m]\n    )\n    * on (ifIndex, instance) group_left(ifName)\n    ifName{\n      job=\"ruckus-access-switches\",\n      instance=\"192.0.100.4\",\n      ifName=~\"ethernet 1/1/.*\"\n    }\n  ) == 2\n)\nor vector(0)\n",
+          "legendFormat": "{{ifName}}",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 2)\n  |> group()\n  |> count()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Server Switch - Empty Ports",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 51,
+      "options": {
+        "animationControlEnabled": false,
+        "animationsEnabled": true,
+        "debuggingCtr": {
+          "colorsCtr": 31,
+          "dataCtr": 0,
+          "displaySvgCtr": 0,
+          "mappingsCtr": 1,
+          "timingsCtr": 0
+        },
+        "highlighterEnabled": true,
+        "highlighterSelection": "",
+        "panZoomEnabled": true,
+        "panelConfig": "---\ncellIdPreamble: \"cell-\"\n\ncells:\n  port1:  { dataRef: port1,  fillColor: { thresholdsRef: operstatus } }\n  port2:  { dataRef: port2,  fillColor: { thresholdsRef: operstatus } }\n  port3:  { dataRef: port3,  fillColor: { thresholdsRef: operstatus } }\n  port4:  { dataRef: port4,  fillColor: { thresholdsRef: operstatus } }\n  port5:  { dataRef: port5,  fillColor: { thresholdsRef: operstatus } }\n  port6:  { dataRef: port6,  fillColor: { thresholdsRef: operstatus } }\n  port7:  { dataRef: port7,  fillColor: { thresholdsRef: operstatus } }\n  port8:  { dataRef: port8,  fillColor: { thresholdsRef: operstatus } }\n  port9:  { dataRef: port9,  fillColor: { thresholdsRef: operstatus } }\n  port10: { dataRef: port10, fillColor: { thresholdsRef: operstatus } }\n  port11: { dataRef: port11, fillColor: { thresholdsRef: operstatus } }\n  port12: { dataRef: port12, fillColor: { thresholdsRef: operstatus } }\n  port13: { dataRef: port13, fillColor: { thresholdsRef: operstatus } }\n  port14: { dataRef: port14, fillColor: { thresholdsRef: operstatus } }\n  port15: { dataRef: port15, fillColor: { thresholdsRef: operstatus } }\n  port16: { dataRef: port16, fillColor: { thresholdsRef: operstatus } }\n  port17: { dataRef: port17, fillColor: { thresholdsRef: operstatus } }\n  port18: { dataRef: port18, fillColor: { thresholdsRef: operstatus } }\n  port19: { dataRef: port19, fillColor: { thresholdsRef: operstatus } }\n  port20: { dataRef: port20, fillColor: { thresholdsRef: operstatus } }\n  port21: { dataRef: port21, fillColor: { thresholdsRef: operstatus } }\n  port22: { dataRef: port22, fillColor: { thresholdsRef: operstatus } }\n  port23: { dataRef: port23, fillColor: { thresholdsRef: operstatus } }\n  port24: { dataRef: port24, fillColor: { thresholdsRef: operstatus } }",
+        "siteConfig": "---\ncolors:\n  up: \"#00c853\"\n  empty: \"#708090\"\n\ncellColorMappings:\n  darkTheme:\n    up: up\n    empty: empty\n\nthresholds:\n  operstatus:\n    - { color: up, level: 1 }   # up\n    - { color: empty, level: 2 }   # empty",
+        "svg": "https://raw.githubusercontent.com/ragini-kumain/grafana-network-assets/main/switches/ruckus_icx8100_24.svg",
+        "testDataEnabled": true,
+        "timeSliderEnabled": true,
+        "timeSliderMode": "local"
+      },
+      "pluginVersion": "1.20.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "max_over_time(\n  ifOperStatus{\n    job=\"ruckus-access-switches\",\n    instance=\"192.0.100.3\"\n  }[5m]\n)\n* on (ifIndex, instance) group_left(ifName)\nifName{\n  job=\"ruckus-access-switches\",\n  instance=\"192.0.100.3\",\n  ifName=~\"ethernet 1/1/.*\"\n}",
+          "legendFormat": "{{ifName}}",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> keep(columns: [\"_time\", \"_value\", \"port\"])\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Switch 1 - Ruckus ICX 8200",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "ethernet 1/1/(\\d+)",
+            "renamePattern": "port$1"
+          }
+        }
+      ],
+      "type": "andrewbmchugh-flow-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "id": 54,
+      "options": {
+        "animationControlEnabled": false,
+        "animationsEnabled": true,
+        "debuggingCtr": {
+          "colorsCtr": 31,
+          "dataCtr": 0,
+          "displaySvgCtr": 0,
+          "mappingsCtr": 1,
+          "timingsCtr": 0
+        },
+        "highlighterEnabled": true,
+        "highlighterSelection": "",
+        "panZoomEnabled": true,
+        "panelConfig": "---\ncellIdPreamble: \"cell-\"\n\ncells:\n  port1:  { dataRef: port1,  fillColor: { thresholdsRef: operstatus } }\n  port2:  { dataRef: port2,  fillColor: { thresholdsRef: operstatus } }\n  port3:  { dataRef: port3,  fillColor: { thresholdsRef: operstatus } }\n  port4:  { dataRef: port4,  fillColor: { thresholdsRef: operstatus } }\n  port5:  { dataRef: port5,  fillColor: { thresholdsRef: operstatus } }\n  port6:  { dataRef: port6,  fillColor: { thresholdsRef: operstatus } }\n  port7:  { dataRef: port7,  fillColor: { thresholdsRef: operstatus } }\n  port8:  { dataRef: port8,  fillColor: { thresholdsRef: operstatus } }\n  port9:  { dataRef: port9,  fillColor: { thresholdsRef: operstatus } }\n  port10: { dataRef: port10, fillColor: { thresholdsRef: operstatus } }\n  port11: { dataRef: port11, fillColor: { thresholdsRef: operstatus } }\n  port12: { dataRef: port12, fillColor: { thresholdsRef: operstatus } }\n  port13: { dataRef: port13, fillColor: { thresholdsRef: operstatus } }\n  port14: { dataRef: port14, fillColor: { thresholdsRef: operstatus } }\n  port15: { dataRef: port15, fillColor: { thresholdsRef: operstatus } }\n  port16: { dataRef: port16, fillColor: { thresholdsRef: operstatus } }\n  port17: { dataRef: port17, fillColor: { thresholdsRef: operstatus } }\n  port18: { dataRef: port18, fillColor: { thresholdsRef: operstatus } }\n  port19: { dataRef: port19, fillColor: { thresholdsRef: operstatus } }\n  port20: { dataRef: port20, fillColor: { thresholdsRef: operstatus } }\n  port21: { dataRef: port21, fillColor: { thresholdsRef: operstatus } }\n  port22: { dataRef: port22, fillColor: { thresholdsRef: operstatus } }\n  port23: { dataRef: port23, fillColor: { thresholdsRef: operstatus } }\n  port24: { dataRef: port24, fillColor: { thresholdsRef: operstatus } }",
+        "siteConfig": "---\ncolors:\n  up: \"#00c853\"\n  empty: \"#708090\"\n\ncellColorMappings:\n  darkTheme:\n    up: up\n    empty: empty\n\nthresholds:\n  operstatus:\n    - { color: up, level: 1 }   # up\n    - { color: empty, level: 2 }   # empty",
+        "svg": "https://raw.githubusercontent.com/ragini-kumain/grafana-network-assets/main/switches/ruckus_icx8100_24.svg",
+        "testDataEnabled": true,
+        "timeSliderEnabled": true,
+        "timeSliderMode": "local"
+      },
+      "pluginVersion": "1.20.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "code",
+          "expr": "max_over_time(\n  ifOperStatus{\n    job=\"ruckus-access-switches\",\n    instance=\"192.0.100.4\"\n  }[5m]\n)\n* on (ifIndex, instance) group_left(ifName)\nifName{\n  job=\"ruckus-access-switches\",\n  instance=\"192.0.100.4\",\n  ifName=~\"ethernet 1/1/.*\"\n}",
+          "legendFormat": "{{ifName}}",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"switch_port_metrics\" and\n    r._field == \"status\" and\n    r.switch == \"icx8200\"\n  )\n  |> group(columns: [\"port\"])\n  |> last()\n  |> keep(columns: [\"_time\", \"_value\", \"port\"])\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Switch 1 - Ruckus ICX 8200",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "ethernet 1/1/(\\d+)",
+            "renamePattern": "port$1"
+          }
+        }
+      ],
+      "type": "andrewbmchugh-flow-panel"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 11,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bfdej2s9fbx8gd"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "text",
+                "mode": "fixed"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "color-text"
+                },
+                "filterable": true,
+                "footer": {
+                  "reducers": []
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Last *"
+                },
+                "properties": [
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "0": {
+                            "color": "text",
+                            "index": 0,
+                            "text": "Offline"
+                          },
+                          "1": {
+                            "color": "green",
+                            "index": 1,
+                            "text": "Online"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 166
+          },
+          "id": 47,
+          "options": {
+            "cellHeight": "md",
+            "frameIndex": 1,
+            "frozenColumns": {
+              "left": 1
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "Active Status"
+              }
+            ]
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "cfa7u8dh14jcwa"
+              },
+              "editorMode": "code",
+              "expr": "ruckusUnleashedWLANAPStatus",
+              "legendFormat": "__auto",
+              "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"ruckus_ap_metrics\" and\n    r._field == \"channel_utilization_5ghz\"\n  )\n  |> group(columns: [\"ap_name\"])\n  |> last()\n  |> filter(fn: (r) => r._value > 75)\n  |> group()\n  |> count()\n",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Total APs Inventory",
+          "transformations": [
+            {
+              "id": "reduce",
+              "options": {
+                "labelsToFields": true,
+                "reducers": [
+                  "lastNotNull"
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Field": true,
+                  "Last *": false,
+                  "__name__": true,
+                  "device_role": true,
+                  "job": true,
+                  "ruckusUnleashedWLANAPMacAddr": false
+                },
+                "includeByName": {},
+                "indexByName": {
+                  "Field": 5,
+                  "Last *": 2,
+                  "__name__": 6,
+                  "device_model": 3,
+                  "device_role": 8,
+                  "instance": 1,
+                  "job": 7,
+                  "ruckusUnleashedWLANAPMacAddr": 0,
+                  "site": 4
+                },
+                "renameByName": {
+                  "Field": "",
+                  "Last *": "Active Status",
+                  "__name__": "Name",
+                  "apMac": "AP MAC",
+                  "device_model": "Device Modal",
+                  "instance": "IP Address",
+                  "job": "Job Name",
+                  "ruckusMemberApName": "AP Name",
+                  "ruckusUnleashedWLANAPMacAddr": "AP MAC Address",
+                  "site": "Site"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bfdej2s9fbx8gd"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "green",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "/ 4"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 7,
+            "x": 12,
+            "y": 166
+          },
+          "id": 48,
+          "options": {
+            "colorMode": "background_solid",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "sum(ruckusUnleashedWLANAPStatus)",
+              "hide": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Online APs / Total APs",
+          "transformations": [
+            {
+              "id": "reduce",
+              "options": {
+                "labelsToFields": true,
+                "reducers": [
+                  "lastNotNull"
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Field": true,
+                  "Last *": false,
+                  "__name__": true,
+                  "job": true
+                },
+                "includeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "apMac": "AP MAC",
+                  "instance": "IP Address"
+                }
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bfdej2s9fbx8gd"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "#d0d0d0",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "text",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 5,
+            "x": 19,
+            "y": 166
+          },
+          "id": 49,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "count(ruckusUnleashedWLANAPStatus) - sum(ruckusUnleashedWLANAPStatus)",
+              "hide": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Offline APs",
+          "transformations": [
+            {
+              "id": "reduce",
+              "options": {
+                "labelsToFields": true,
+                "reducers": [
+                  "lastNotNull"
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Field": true,
+                  "Last *": false,
+                  "__name__": true,
+                  "job": true
+                },
+                "includeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "apMac": "AP MAC",
+                  "instance": "IP Address"
+                }
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bfdej2s9fbx8gd"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "footer": {
+                  "reducers": []
+                },
+                "inspect": false,
+                "wrapHeaderText": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "0x789F6A3BE2A0": {
+                      "index": 0,
+                      "text": "Access Point 1"
+                    },
+                    "0x789F6A3BE3B0": {
+                      "index": 1,
+                      "text": "Access Point 2"
+                    },
+                    "0x789F6A3BE660": {
+                      "index": 2,
+                      "text": "Access Point 3"
+                    },
+                    "0x789F6A3BE8C0": {
+                      "index": 3,
+                      "text": "Access Point 4"
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_time"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Exact Timestamp"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "ap_name"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Access Point Name"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_time"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "dateTimeAsIso"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Last Reported"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "dateTimeFromNow"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 241
+          },
+          "id": 13,
+          "options": {
+            "cellHeight": "md",
+            "frozenColumns": {
+              "left": 1
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "cfa7u8dh14jcwa"
+              },
+              "editorMode": "code",
+              "expr": "ruckusUnleashedWLANAPStatus == 0",
+              "legendFormat": "__auto",
+              "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"ruckus_ap_metrics\" and\n    r._field == \"status\"\n  )\n  |> group(columns: [\"ap_name\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 0)\n  |> group()\n  |> keep(columns: [\"ap_name\", \"_time\"])\n  |> sort(columns: [\"ap_name\"])\n",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Offline AP Details",
+          "transformations": [
+            {
+              "id": "reduce",
+              "options": {
+                "labelsToFields": true,
+                "reducers": [
+                  "lastNotNull"
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Field": true,
+                  "Last *": true,
+                  "__name__": true,
+                  "job": true
+                },
+                "includeByName": {},
+                "indexByName": {
+                  "Field": 8,
+                  "Last *": 6,
+                  "__name__": 7,
+                  "device_model": 2,
+                  "device_role": 3,
+                  "instance": 1,
+                  "job": 5,
+                  "ruckusUnleashedWLANAPMacAddr": 0,
+                  "site": 4
+                },
+                "orderByMode": "manual",
+                "renameByName": {
+                  "apMac": "AP MAC",
+                  "device_model": "Device Modal",
+                  "device_role": "Device Role",
+                  "instance": "IP Address",
+                  "job": "Job Name",
+                  "ruckusUnleashedWLANAPMacAddr": "AP MAC Address",
+                  "site": "Site"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bfdej2s9fbx8gd"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "footer": {
+                  "reducers": []
+                },
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "0x789F6A3BE2A0": {
+                      "index": 0,
+                      "text": "Access Point 1"
+                    },
+                    "0x789F6A3BE3B0": {
+                      "index": 1,
+                      "text": "Access Point 2"
+                    },
+                    "0x789F6A3BE660": {
+                      "index": 2,
+                      "text": "Access Point 3"
+                    },
+                    "0x789F6A3BE8C0": {
+                      "index": 3,
+                      "text": "Access Point 4"
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_time"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Exact Timestamp"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "ap_name"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Access Point Name"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_time"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "dateTimeAsIso"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Last Reported"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "dateTimeFromNow"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 241
+          },
+          "id": 50,
+          "options": {
+            "cellHeight": "sm",
+            "showHeader": true
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "cfa7u8dh14jcwa"
+              },
+              "editorMode": "code",
+              "expr": "ruckusUnleashedWLANAPStatus == 1",
+              "legendFormat": "__auto",
+              "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"ruckus_ap_metrics\" and\n    r._field == \"status\"\n  )\n  |> group(columns: [\"ap_name\"])\n  |> last()\n  |> filter(fn: (r) => r._value == 0)\n  |> group()\n  |> keep(columns: [\"ap_name\", \"_time\"])\n  |> sort(columns: [\"ap_name\"])\n",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Online AP Details",
+          "transformations": [
+            {
+              "id": "reduce",
+              "options": {
+                "labelsToFields": true,
+                "reducers": [
+                  "lastNotNull"
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Field": true,
+                  "Last *": true,
+                  "__name__": true,
+                  "job": true
+                },
+                "includeByName": {},
+                "indexByName": {
+                  "Field": 7,
+                  "Last *": 8,
+                  "__name__": 6,
+                  "device_model": 2,
+                  "device_role": 3,
+                  "instance": 1,
+                  "job": 4,
+                  "ruckusUnleashedWLANAPMacAddr": 0,
+                  "site": 5
+                },
+                "orderByMode": "manual",
+                "renameByName": {
+                  "apMac": "AP MAC",
+                  "device_model": "Device Modal",
+                  "device_role": "Device Role",
+                  "instance": "IP Address",
+                  "job": "Job Name",
+                  "ruckusUnleashedWLANAPMacAddr": "AP MAC Address",
+                  "site": "Site"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bfdej2s9fbx8gd"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "footer": {
+                  "reducers": []
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "ap_name"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Access Point Name"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "clients"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "No. of Clients"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "utilization"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Utilization"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "utilization"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 250
+          },
+          "id": 15,
+          "options": {
+            "cellHeight": "sm",
+            "showHeader": true
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "cfa7u8dh14jcwa"
+              },
+              "editorMode": "code",
+              "expr": "min(up{device_role=\"core\"})",
+              "legendFormat": "__auto",
+              "query": "last_utilization = from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r._measurement == \"ruckus_ap_metrics\" and r._field == \"channel_utilization_5ghz\")\n  |> group(columns: [\"ap_name\"])\n  |> last()\n  |> filter(fn: (r) => r._value > 75)\n  |> keep(columns: [\"ap_name\", \"_value\"])\n  |> rename(columns: {_value: \"utilization\"})\n\nlast_client_count = from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r._measurement == \"ruckus_ap_metrics\" and r._field == \"client_count\")\n  |> group(columns: [\"ap_name\"])\n  |> last()\n  |> keep(columns: [\"ap_name\", \"_value\"])\n  |> rename(columns: {_value: \"clients\"})\n\njoin(\n  tables: {util: last_utilization, clients: last_client_count},\n  on: [\"ap_name\"]\n)\n|> sort(columns: [\"utilization\"], desc: true)\n|> group()\n",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Slow APs Details",
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 5,
+            "x": 12,
+            "y": 250
+          },
+          "id": 14,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "cfa7u8dh14jcwa"
+              },
+              "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) =>\n    r._measurement == \"ruckus_ap_metrics\" and\n    r._field == \"channel_utilization_5ghz\"\n  )\n  |> group(columns: [\"ap_name\"])\n  |> last()\n  |> filter(fn: (r) => r._value > 75)\n  |> group()\n  |> count()\n",
+              "refId": "A"
+            }
+          ],
+          "title": "Slow APs (High Utilization)",
+          "type": "stat"
+        }
+      ],
+      "title": "Access Points Monitoring",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 26,
+      "panels": [],
+      "title": "Temperature Sensor Monitoring",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 15
+              },
+              {
+                "color": "orange",
+                "value": 25
+              },
+              {
+                "color": "red",
+                "value": 28
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 34
+      },
+      "id": 27,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bfdej2s9fbx8gd"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "modbus_temperature_celsius{device=\"172.16.2.49\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Temperature Trend",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 22
+              },
+              {
+                "color": "red",
+                "value": 25
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 34
+      },
+      "id": 29,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "inverted",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": true,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "builder",
+          "expr": "modbus_temperature_celsius{device=\"172.16.2.49\"}",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -10m)\n  |> filter(fn: (r) =>\n    r._measurement == \"environment\" and\n    r._field == \"temperature\" and\n    r.location == \"server_room\"\n  )\n  |> group()\n  |> last()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Ambient Room Temperature",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 22
+              },
+              {
+                "color": "red",
+                "value": 25
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 34
+      },
+      "id": 31,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "builder",
+          "expr": "avg_over_time(modbus_temperature_celsius{device=\"172.16.2.49\"}[24h])",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -24h)\n  |> filter(fn: (r) =>\n    r._measurement == \"environment\" and\n    r._field == \"temperature\" and\n    r.location == \"server_room\"\n  )\n  |> group()\n  |> mean()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Average Temperature (last 24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 0,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 15
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 22
+              },
+              {
+                "color": "dark-red",
+                "value": 28
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 42
+      },
+      "id": 30,
+      "interval": "5m",
+      "maxDataPoints": 1455,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "builder",
+          "expr": "modbus_temperature_celsius{device=\"172.16.2.49\"}",
+          "legendFormat": "__auto",
+          "query": "from(bucket: v.defaultBucket)\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r._measurement == \"environment\" and\n    r._field == \"temperature\" and\n    r.location == \"server_room\"\n  )\n  |> group()\n  |> aggregateWindow(\n    every: v.windowPeriod,\n    fn: mean,\n    createEmpty: false\n  )\n  |> yield(name: \"mean_temperature\")\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Temperature",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 22
+              },
+              {
+                "color": "red",
+                "value": 24
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 42
+      },
+      "id": 28,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "builder",
+          "expr": "max_over_time(modbus_temperature_celsius{device=\"172.16.2.49\"}[24h])",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -24h)\n  |> filter(fn: (r) =>\n    r._measurement == \"environment\" and\n    r._field == \"temperature\" and\n    r.location == \"server_room\"\n  )\n  |> max()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Max Temperature (last 24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 22
+              },
+              {
+                "color": "red",
+                "value": 25
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 42
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "builder",
+          "expr": "min_over_time(modbus_temperature_celsius{device=\"172.16.2.49\"}[24h])",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -24h)\n  |> filter(fn: (r) =>\n    r._measurement == \"environment\" and\n    r._field == \"temperature\" and\n    r.location == \"server_room\"\n  )\n  |> group()\n  |> min()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Min Temperature (last 24h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "index": 0,
+                  "text": "Dry"
+                },
+                "to": 29.9
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 30,
+                "result": {
+                  "index": 1,
+                  "text": "Normal"
+                },
+                "to": 59.9
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 60,
+                "result": {
+                  "index": 2,
+                  "text": "High"
+                },
+                "to": 100
+              },
+              "type": "range"
+            }
+          ],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-yellow",
+                "value": 0
+              },
+              {
+                "color": "dark-green",
+                "value": 30
+              },
+              {
+                "color": "dark-red",
+                "value": 60
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 50
+      },
+      "id": 33,
+      "interval": "5m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "builder",
+          "expr": "modbus_humidity_percent{device=\"172.16.2.49\"}",
+          "legendFormat": "__auto",
+          "query": "from(bucket: v.defaultBucket)\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r._measurement == \"environment\" and\n    r._field == \"humidity\" and\n    r.location == \"server_room\"\n  )\n  |> group()\n  |> aggregateWindow(\n    every: v.windowPeriod,\n    fn: mean,\n    createEmpty: false\n  )\n  |> yield(name: \"mean\")\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Humidity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 65
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "humidity"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 50
+      },
+      "id": 34,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "builder",
+          "expr": "modbus_humidity_percent{device=\"172.16.2.49\"}",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -10m)\n  |> filter(fn: (r) =>\n    r._measurement == \"environment\" and\n    r._field == \"humidity\" and\n    r.location == \"server_room\"\n  )\n  |> group()\n  |> last()\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Ambient Room Humidity",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bfdej2s9fbx8gd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 65
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "humidity"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 50
+      },
+      "id": 35,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "cfa7u8dh14jcwa"
+          },
+          "editorMode": "builder",
+          "expr": "max_over_time(modbus_humidity_percent{device=\"172.16.2.49\"}[24h])",
+          "legendFormat": "__auto",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) =>\n    r._measurement == \"environment\" and\n    r._field == \"humidity\" and\n    r.location == \"server_room\"\n  )\n  |> group()\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Humidity Trend (24h)",
+      "type": "stat"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 58
+      },
+      "id": 7,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af9xabrbkdyiof"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "orange",
+                    "value": 70
+                  },
+                  {
+                    "color": "red",
+                    "value": 85
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 387
+          },
+          "id": 3,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "100 * (\n    hrStorageUsed{job=\"snmp-servers\", hrStorageIndex=\"1\"}\n  /\n    hrStorageSize{job=\"snmp-servers\", hrStorageIndex=\"1\"}\n)",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Memory Utilization",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af9xabrbkdyiof"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 2,
+              "displayName": "CPU",
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "orange",
+                    "value": 70
+                  },
+                  {
+                    "color": "red",
+                    "value": 85
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 6,
+            "y": 387
+          },
+          "id": 2,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "avg by (instance) (hrProcessorLoad{job=\"snmp-servers\"})",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "CPU Usage %",
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af9xabrbkdyiof"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": true,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "right",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 19,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "dashed"
+                }
+              },
+              "displayName": "CPU",
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 60
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 16,
+            "w": 12,
+            "x": 12,
+            "y": 387
+          },
+          "id": 1,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "timezone": [
+              ""
+            ],
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ff9mn6j76dibkf"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "avg by(instance) (hrProcessorLoad{job=\"snmp-servers\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "CPU Utilization",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af9xabrbkdyiof"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "right",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 1,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 407
+          },
+          "id": 4,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "hrProcessorLoad{job=\"snmp-servers\"}",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "CPU {{hrProcessorIndex}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": " CPU Utilization panel",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af9xabrbkdyiof"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 12,
+            "x": 0,
+            "y": 417
+          },
+          "id": 6,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "100 * (\n  hrStorageUsed{job=\"snmp-servers\", hrStorageDescr=~\"/.*\"}\n  / \n  hrStorageSize{job=\"snmp-servers\", hrStorageDescr=~\"/.*\"}\n)",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Network",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af9xabrbkdyiof"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds",
+                "seriesBy": "min"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "right",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 3,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "smooth",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 1,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 12,
+            "x": 12,
+            "y": 417
+          },
+          "id": 5,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "100 * (hrStorageUsed{job=\"snmp-servers\", hrStorageIndex=\"1\"} / hrStorageSize{job=\"snmp-servers\", hrStorageIndex=\"1\"})",
+              "legendFormat": "Memory",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ff9mn6j76dibkf"
+              },
+              "editorMode": "code",
+              "expr": "100 * (hrStorageUsed{job=\"snmp-servers\", hrStorageIndex=\"10\"} / hrStorageSize{job=\"snmp-servers\", hrStorageIndex=\"10\"})",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "Swap",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Memory Utilization panel",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Server Monitoring",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 59
+      },
+      "id": 16,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af9xabrbkdyiof"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "decimals": 1,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 8,
+            "x": 0,
+            "y": 388
+          },
+          "id": 17,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "af9xabrbkdyiof"
+              },
+              "editorMode": "code",
+              "expr": "delta(mssql_cpu_wait_ms[30m])",
+              "legendFormat": "{{target}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "MSSQL CPU Wait (SOS_SCHEDULER_YIELD)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af9xabrbkdyiof"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "decimals": 1,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 8,
+            "x": 8,
+            "y": 388
+          },
+          "id": 18,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "af9xabrbkdyiof"
+              },
+              "editorMode": "code",
+              "expr": "delta(mssql_lock_wait_ms[10m])",
+              "legendFormat": "{{target}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "MSSQL Lock Wait (LCK_M_)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "af9xabrbkdyiof"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "decimals": 1,
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 8,
+            "x": 16,
+            "y": 388
+          },
+          "id": 19,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "af9xabrbkdyiof"
+              },
+              "editorMode": "code",
+              "expr": "delta(mssql_disk_wait_ms[10m])",
+              "legendFormat": "{{target}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "MSSQL Disk Wait (PAGEIOLATCH)",
+          "type": "timeseries"
+        }
+      ],
+      "title": "MSSQL Monitoring",
+      "type": "row"
+    }
+  ],
+  "preload": false,
+  "refresh": "30s",
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Mochiko Infra Monitoring",
+  "uid": "af9fq34uvlqf4d",
+  "version": 103
+}
