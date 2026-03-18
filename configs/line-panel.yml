@@ -1,8 +1,30 @@
-cellIdPreamble: "cell-"
+---
 
-cells:
+cellIdPreamble: "cell-"
+cells: 
   reebok:
+    dataRef: "MSPL-U1"
+
+    bespokeDataRef: null
+
+    # datapoint: "max"
+
+    # The fill color field defines how the cell should be colored based on the
+    # time-series value. If no adjustment is wanted the field should be omitted.
     fillColor:
-      fixed: "#ff0000"
-    label:
-      text: "WORKING"
+      # See labelColor
+      dataRef: "MSPL-U1"
+    
+      # See labelColor
+      # datapoint: "last"
+
+      # See labelColor
+      # gradientMode: "hue"
+
+      # See labelColor
+      thresholds:
+        - {color: "green", level: 0}
+        - {color: "red", level: 1}
+
+      # See labelColor
+      thresholdsRef: "depth"
