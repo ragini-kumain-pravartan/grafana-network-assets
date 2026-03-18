@@ -1,0 +1,8 @@
+cellIdPreamble: "cell-"
+
+cells:
+  reebok:
+    fillColor:
+      fixed: "#ff0000"
+    label:
+      text: "WORKING"
