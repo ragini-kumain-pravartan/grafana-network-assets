@@ -496,16 +496,17 @@
 </g>
 </g>
 
-<g id="cell-reebok">
-  <g transform="translate(0.5,0.5)">
-    <ellipse cx="49.76" cy="610" rx="10" ry="10"
-             fill="currentColor"
-             stroke="#000000"
-             transform="rotate(90,49.76,610)"
-             pointer-events="all"/>
-  </g>
-</g>
-
+<ellipse
+  id="cell-reebok"
+  cx="49.76"
+  cy="610"
+  rx="10"
+  ry="10"
+  fill="#00ff00"
+  stroke="none"
+  transform="rotate(90,49.76,610)"
+  pointer-events="all"/>
+  
 <g data-cell-id="JHoSuvdlAbbKGPDlBJ68-1">
 <g transform="translate(0.5,0.5)"/></g>
 
