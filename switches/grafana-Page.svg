@@ -496,9 +496,14 @@
 </g>
 </g>
 
-<g data-cell-id="cell-reebok">
-<g transform="translate(0.5,0.5)">
-<ellipse cx="49.76" cy="610" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,49.76,610)" pointer-events="all"/></g>
+<g id="cell-reebok">
+  <g transform="translate(0.5,0.5)">
+    <ellipse cx="49.76" cy="610" rx="10" ry="10"
+             fill="currentColor"
+             stroke="#000000"
+             transform="rotate(90,49.76,610)"
+             pointer-events="all"/>
+  </g>
 </g>
 
 <g data-cell-id="JHoSuvdlAbbKGPDlBJ68-1">
@@ -506,107 +511,107 @@
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-2">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="290" cy="609.23" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,290,609.23)" pointer-events="all"/></g>
+<ellipse cx="290" cy="609.23" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,290,609.23)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-3">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="528.75" cy="610" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,528.75,610)" pointer-events="all"/></g>
+<ellipse cx="528.75" cy="610" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,528.75,610)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-4">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="48.75" cy="1050" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,48.75,1050)" pointer-events="all"/></g>
+<ellipse cx="48.75" cy="1050" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,48.75,1050)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-5">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="290" cy="1050" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,290,1050)" pointer-events="all"/></g>
+<ellipse cx="290" cy="1050" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,290,1050)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-6">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="450" cy="1050" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,450,1050)" pointer-events="all"/></g>
+<ellipse cx="450" cy="1050" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,450,1050)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-7">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="610" cy="1050" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,610,1050)" pointer-events="all"/></g>
+<ellipse cx="610" cy="1050" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,610,1050)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-8">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="848.87" cy="1050" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,848.87,1050)" pointer-events="all"/></g>
+<ellipse cx="848.87" cy="1050" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,848.87,1050)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-9">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="848.87" cy="1210" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,848.87,1210)" pointer-events="all"/></g>
+<ellipse cx="848.87" cy="1210" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,848.87,1210)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-10">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1010.01" cy="1050" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1010.01,1050)" pointer-events="all"/></g>
+<ellipse cx="1010.01" cy="1050" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1010.01,1050)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-11">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1170" cy="1050" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1170,1050)" pointer-events="all"/></g>
+<ellipse cx="1170" cy="1050" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1170,1050)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-12">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1424.61" cy="1050" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1424.61,1050)" pointer-events="all"/></g>
+<ellipse cx="1424.61" cy="1050" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1424.61,1050)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-15">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1620" cy="1050" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1620,1050)" pointer-events="all"/></g>
+<ellipse cx="1620" cy="1050" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1620,1050)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-16">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1208.75" cy="770" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1208.75,770)" pointer-events="all"/></g>
+<ellipse cx="1208.75" cy="770" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1208.75,770)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-17">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1290" cy="450" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1290,450)" pointer-events="all"/></g>
+<ellipse cx="1290" cy="450" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1290,450)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-18">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1464.37" cy="450" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1464.37,450)" pointer-events="all"/></g>
+<ellipse cx="1464.37" cy="450" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1464.37,450)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-19">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1701.13" cy="450" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1701.13,450)" pointer-events="all"/></g>
+<ellipse cx="1701.13" cy="450" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1701.13,450)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-20">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1930" cy="440" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1930,440)" pointer-events="all"/></g>
+<ellipse cx="1930" cy="440" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1930,440)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-21">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1768.91" cy="600" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1768.91,600)" pointer-events="all"/></g>
+<ellipse cx="1768.91" cy="600" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1768.91,600)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-22">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1490.48" cy="610" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1490.48,610)" pointer-events="all"/></g>
+<ellipse cx="1490.48" cy="610" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1490.48,610)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-23">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1727.42" cy="770" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1727.42,770)" pointer-events="all"/></g>
+<ellipse cx="1727.42" cy="770" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1727.42,770)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="Ufm0iGy7z_N-X7Jqunsl-24">
 <g transform="translate(0.5,0.5)">
-<ellipse cx="1488.75" cy="771.29" rx="10" ry="10" fill="#ffffff"  stroke="#000000" transform="rotate(90,1488.75,771.29)" pointer-events="all"/></g>
+<ellipse cx="1488.75" cy="771.29" rx="10" ry="10" fill="#ffffff" stroke="#000000" transform="rotate(90,1488.75,771.29)" pointer-events="all"/></g>
 </g>
 
 <g data-cell-id="XS908Vjk04ZO_mqb1xRj-3">
