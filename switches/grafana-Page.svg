@@ -499,8 +499,7 @@
   cy="610"
   rx="10"
   ry="10"
-  fill="#00ff00"
-  stroke="none"
+  fill="#ffffff"  stroke="#000000"
   transform="rotate(90,49.76,610)"
   pointer-events="all"/>
 <g data-cell-id="JHoSuvdlAbbKGPDlBJ68-1">
