@@ -1,30 +1,151 @@
 ---
-
 cellIdPreamble: "cell-"
-cells: 
-  reebok:
+
+cells:
+  reebok_wh_st:
     dataRef: "MSPL-U1"
-
-    bespokeDataRef: null
-
-    # datapoint: "max"
-
-    # The fill color field defines how the cell should be colored based on the
-    # time-series value. If no adjustment is wanted the field should be omitted.
     fillColor:
-      # See labelColor
       dataRef: "MSPL-U1"
-    
-      # See labelColor
-      # datapoint: "last"
-
-      # See labelColor
-      # gradientMode: "hue"
-
-      # See labelColor
       thresholds:
-        - {color: "green", level: 0}
-        - {color: "red", level: 1}
-
-      # See labelColor
-      thresholdsRef: "depth"
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  msplu2_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  msplu5_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  mochikost_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  sportsa_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  msplu6_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  pumawh_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  fabsol_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  soltecu2_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  fabsolstore_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  sportswh_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  sportsstore_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  devandcomm_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  pumasportsstore_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  pumasolestore_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  pumadev_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  soletecu2wh_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  soletecfgwh_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  msplu4_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  soltecu1_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  soltecmtwh_st:
+    dataRef: "MSPL-U1"
+    fillColor:
+      dataRef: "MSPL-U1"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
