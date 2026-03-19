@@ -3,149 +3,156 @@ cellIdPreamble: "cell-"
 
 cells:
   reebok_wh_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-REEBOK-WAREHOUSE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-REEBOK-WAREHOUSE"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   msplu2_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-U2"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-U2"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   msplu5_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-U5"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-U5"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   mochikost_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-STORE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-STORE"
+      thresholds:
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  sportsb_st:
+    dataRef: "MSPL-SPORTS-B"
+    fillColor:
+      dataRef: "MSPL-SPORTS-B"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   sportsa_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SPORTS-A"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SPORTS-A"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   msplu6_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-U6"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-U6"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   pumawh_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-PUMA-WAREHOUSE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-PUMA-WAREHOUSE"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   fabsol_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-FABSOL"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-FABSOL"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   soltecu2_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SOLTEC-U2"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SOLTEC-U2"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   fabsolstore_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-FABSOL-STORE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-FABSOL-STORE"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   sportswh_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SPORTS-WAREHOUSE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SPORTS-WAREHOUSE"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   sportsstore_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SPORTS-STORE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SPORTS-STORE"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   devandcomm_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-DEV-COMM"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-DEV-COMM"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   pumasportsstore_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SPORTS-STORE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SPORTS-STORE"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   pumasolestore_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SOLE-STORE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SOLE-STORE"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   pumadev_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-PUMA-DEV"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-PUMA-DEV"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   soletecu2wh_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SOLTEC-U2-WAREHOUSE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SOLTEC-U2-WAREHOUSE"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   soletecfgwh_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SOLTEC-GODOWN"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SOLTEC-GODOWN"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   msplu4_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-U4"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-U4"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   soltecu1_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SOLTEC-U1"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SOLTEC-U1"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
   soltecmtwh_st:
-    dataRef: "MSPL-U1"
+    dataRef: "MSPL-SOLTEC-MAINTENANCE-STORE"
     fillColor:
-      dataRef: "MSPL-U1"
+      dataRef: "MSPL-SOLTEC-MAINTENANCE-STORE"
       thresholds:
         - {color: "red", level: 0}
         - {color: "green", level: 1}
