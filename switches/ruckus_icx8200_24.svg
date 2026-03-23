@@ -13,7 +13,7 @@
 
   <!-- Background Switch Image -->
   <image 
-    href="https://www.netwifi.com.au/images/ICX-Switches/ICX8200/icx-family-stack.jpg"
+    href="https://raw.githubusercontent.com/ragini-kumain/grafana-network-assets/main/icx-8200.png"
     x="0"
     y="0"
     width="1200"
