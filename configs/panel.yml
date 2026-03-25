@@ -26,3 +26,7 @@ cells:
   port22: { dataRef: port22, fillColor: { thresholdsRef: operstatus } }
   port23: { dataRef: port23, fillColor: { thresholdsRef: operstatus } }
   port24: { dataRef: port24, fillColor: { thresholdsRef: operstatus } }
+  port01: { dataRef: port01, fillColor: { thresholdsRef: operstatus } }
+  port02: { dataRef: port02, fillColor: { thresholdsRef: operstatus } }
+  port03: { dataRef: port03, fillColor: { thresholdsRef: operstatus } }
+  port04: { dataRef: port04, fillColor: { thresholdsRef: operstatus } }
